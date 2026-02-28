@@ -5,6 +5,11 @@ const theme = createTheme({
   typography: {
     fontFamily: "var(--font-roboto)",
   },
+  palette: {
+    background: {
+      default: "#ccc", // Your desired color
+    },
+  },
   cssVariables: true,
 });
 
