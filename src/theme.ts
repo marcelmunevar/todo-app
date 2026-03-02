@@ -6,9 +6,7 @@ const theme = createTheme({
     fontFamily: "var(--font-roboto)",
   },
   palette: {
-    background: {
-      default: "#ccc", // Your desired color
-    },
+    mode: "dark",
   },
   cssVariables: true,
 });
