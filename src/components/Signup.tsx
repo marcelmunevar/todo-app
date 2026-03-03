@@ -27,11 +27,11 @@ function Login() {
         >
           <Stack spacing={2}>
             <Typography variant="h5" component="h1">
-              Sign in
+              Sign up
             </Typography>
             <Box>
               <Typography sx={{ mb: 2 }}>
-                Welcome user, please sign in to continue
+                Welcome user, please sign up to continue
               </Typography>
             </Box>
             <TextField
@@ -40,11 +40,11 @@ function Login() {
               variant="outlined"
             />
             <TextField id="outlined-basic" label="Password" type="password" />
-            <Button variant="contained">Sign In</Button>
+            <Button variant="contained">Sign Up</Button>
             <Typography sx={{ mb: 2 }}>
-              Don't have a login?
-              <NextLink href="/signup" passHref>
-                <Button variant="text">Sign Up</Button>
+              Already a user?
+              <NextLink href="/" passHref>
+                <Button variant="text">Sign In</Button>
               </NextLink>
             </Typography>
           </Stack>
