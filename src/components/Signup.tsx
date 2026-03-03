@@ -5,8 +5,14 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import NextLink from "next/link";
+import { signUpNewUser } from "@/utils/supabaseClient";
 
-function Login() {
+function Signup() {
+  //set up usestate for username and password
+  //add onchange to text fields
+  //write handlesignup
+  //add handlesignup to button
+
   return (
     <Container maxWidth="lg" sx={{ padding: "2rem" }}>
       <Container maxWidth="sm">
@@ -53,4 +59,4 @@ function Login() {
     </Container>
   );
 }
-export default Login;
+export default Signup;
