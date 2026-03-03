@@ -1,3 +1,4 @@
+"use client";
 import TextField from "@mui/material/TextField";
 import Stack from "@mui/material/Stack";
 import Container from "@mui/material/Container";
@@ -5,13 +6,33 @@ import Box from "@mui/material/Box";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
 import NextLink from "next/link";
-import { signUpNewUser } from "@/utils/supabaseClient";
+import { useState } from "react";
+import { createClient } from "@/lib/supabase/client";
+
+async function signUpNewUser(email: string, password: string) {
+  const supabase = createClient();
+  const { data, error } = await supabase.auth.signUp({
+    email: email,
+    password: password,
+    options: {
+      emailRedirectTo: "http://localhost:3000/welcome",
+    },
+  });
+}
 
 function Signup() {
-  //set up usestate for username and password
-  //add onchange to text fields
-  //write handlesignup
-  //add handlesignup to button
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState<string | null>(null);
+
+  const handleSignup = async () => {
+    try {
+      await signUpNewUser(email, password);
+      setError(null);
+    } catch (e) {
+      setError("Signup failed!");
+    }
+  };
 
   return (
     <Container maxWidth="lg" sx={{ padding: "2rem" }}>
@@ -40,14 +61,29 @@ function Signup() {
                 Welcome user, please sign up to continue
               </Typography>
             </Box>
+            <Typography variant="caption" color="error" component="p">
+              {error}
+            </Typography>
             <TextField
               id="outlined-basic"
-              label="Username"
+              label="Email"
               variant="outlined"
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setEmail(event.target.value);
+              }}
             />
-            <TextField id="outlined-basic" label="Password" type="password" />
-            <Button variant="contained">Sign Up</Button>
-            <Typography sx={{ mb: 2 }}>
+            <TextField
+              id="outlined-basic"
+              label="Password"
+              type="password"
+              onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                setPassword(event.target.value);
+              }}
+            />
+            <Button variant="contained" onClick={handleSignup}>
+              Sign Up
+            </Button>
+            <Typography sx={{ mb: 2 }} component="p">
               Already a user?
               <NextLink href="/" passHref>
                 <Button variant="text">Sign In</Button>
